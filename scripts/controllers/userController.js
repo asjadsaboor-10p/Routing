@@ -3,9 +3,13 @@
  */
 
 
-angular.module('accountingApp').controller('userCtrl',function($scope,$http,dataFactory){
+angular.module('accountingApp').controller('showUsersCtrl', function ($scope, $http, userFactory) {
 
-    dataFactory.getUsers().then(
-        function(response) { $scope.users = response.data;});
+    userFactory.getUsers().then(
+        function (response) {
+            $scope.users = response.data;
+        });
 
 });
+
+

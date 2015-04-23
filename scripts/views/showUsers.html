@@ -1,0 +1,25 @@
+<div class="h1" style="text-align: center"> Users </div>
+<div ng-controller="showUsersCtrl" class="center-block" style="width: 600px">
+    <table st-table="rowCollection" class="table table-striped table-hover table-bordered ">
+
+        <tr>
+            <th>
+                <a href="" ng-click="orderByField='userId'; reverseSort = !reverseSort">User Id</a>
+            </th>
+
+            <th>
+                <a href="" ng-click="orderByField='name'; reverseSort = !reverseSort">Name</a>
+            </th>
+            <th>
+                <a href="" ng-click="orderByField='address'; reverseSort = !reverseSort">Address</a>
+            </th>
+        </tr>
+        <tbody>
+        <tr ng-repeat="x in users | orderBy:orderByField:reverseSort">
+            <td> <a href="#Users/{{x.userId}}/Accounts" >{{x.userId}} </a></td>
+            <td>{{x.name}}</td>
+            <td>{{x.address}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
