@@ -3,9 +3,12 @@
  */
 
 
-angular.module('accountingApp').controller('showUserAccountsCtrl', function ($scope, $http, $routeParams, accountFactory) {
+angular.module('accountingApp').controller('showUserAccountsCtrl', function ($scope, $http,$location, $routeParams, accountFactory) {
 
     $scope.userAccounts;
+    $scope.userId=$routeParams.userId;
+
+
     $scope.getUserAccounts = function () {
         return accountFactory.getUsersAccounts().success(
             function (response) {
@@ -27,5 +30,8 @@ angular.module('accountingApp').controller('showUserAccountsCtrl', function ($sc
             .splice(accountFactory.getUserAccountIndex($scope.userAccounts,accountId), 1);
     }
 
-
+    $scope.viewTransactionButtonClicked = function ( path ) {
+        console.log(path)
+        $location.path( path );
+    };
 });

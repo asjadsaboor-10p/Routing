@@ -14,6 +14,10 @@ app.config(
                 templateUrl: 'showUserAccounts.html',
                 controller: 'showUserAccountsCtrl'
             }).
+            when('/Users/:userId/Account/:accountId/Transactions', {
+                templateUrl: 'showUserAccountTransactions.html',
+                controller: 'showUserAccountTransactionsCtrl'
+            }).
             otherwise({
                 redirectTo: '/Users'
             });
