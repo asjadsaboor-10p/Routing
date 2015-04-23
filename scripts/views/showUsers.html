@@ -15,8 +15,8 @@
             </th>
         </tr>
         <tbody>
-        <tr ng-repeat="x in users | orderBy:orderByField:reverseSort">
-            <td> <a href="#Users/{{x.userId}}/Accounts" >{{x.userId}} </a></td>
+        <tr ng-repeat="x in users | orderBy:orderByField:reverseSort" ng-click="go('/Users/'+x.userId+'/Accounts')" >
+            <td> <a href="" >{{x.userId}} </a></td>
             <td>{{x.name}}</td>
             <td>{{x.address}}</td>
         </tr>

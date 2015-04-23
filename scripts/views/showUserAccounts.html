@@ -1,27 +1,24 @@
-<div class="h1" style="text-align: center"> Accounts </div>
+<div class="h1" style="text-align: center"> Accounts</div>
 <div ng-controller="showUserAccountsCtrl" class="center-block" style="width: 600px">
     <table st-table="rowCollection" class="table table-striped table-hover table-bordered ">
 
         <tr>
             <th>
-                User Id
+                <a href="" ng-click="orderByField='accountTitle'; reverseSort = !reverseSort"> Account Title </a>
             </th>
             <th>
-                account title
+                <a href="" ng-click="orderByField='accountId'; reverseSort = !reverseSort"> Account Id </a>
             </th>
             <th>
-                account id
+                <a href="" ng-click="orderByField='balance'; reverseSort = !reverseSort"> Balance </a>
             </th>
         </tr>
         <tbody>
-        <tr ng-repeat="x in userAccounts">
-          <td>{{x.accountTitle}}</td>
-            <td></td>
-            <td></td>
-
-
-        </tr>
-
+            <tr ng-repeat="x in userAccounts |  orderBy:orderByField:reverseSort">
+                <td>{{x.accountTitle}}</td>
+                <td>{{x.accountId}}</td>
+                <td>{{x.balance}}</td>
+            </tr>
         </tbody>
     </table>
 </div>

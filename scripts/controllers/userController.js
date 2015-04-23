@@ -3,12 +3,17 @@
  */
 
 
-angular.module('accountingApp').controller('showUsersCtrl', function ($scope, $http, userFactory) {
+angular.module('accountingApp').controller('showUsersCtrl', function ($scope, $http,$location, userFactory) {
 
     userFactory.getUsers().then(
         function (response) {
             $scope.users = response.data;
         });
+
+    $scope.go = function ( path ) {
+        console.log("go  " + path);
+        $location.path( path );
+    };
 
 });
 
