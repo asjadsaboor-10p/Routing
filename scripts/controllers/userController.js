@@ -10,7 +10,7 @@ angular.module('accountingApp').controller('showUsersCtrl', function ($scope, $h
             $scope.users = response.data;
         });
 
-    $scope.go = function ( path ) {
+    $scope.viewAccountsButtonClicked = function ( path ) {
         console.log("go  " + path);
         $location.path( path );
     };

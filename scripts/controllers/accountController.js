@@ -3,33 +3,29 @@
  */
 
 
-angular.module('accountingApp').controller('showUserAccountsCtrl', function ($scope, $http, $routeParams) {
+angular.module('accountingApp').controller('showUserAccountsCtrl', function ($scope, $http, $routeParams, accountFactory) {
 
     $scope.userAccounts;
-    $scope.search = function () {
-        var url = '../../data/accounts.json';
-
-        return $http.get(url).success(
+    $scope.getUserAccounts = function () {
+        return accountFactory.getUsersAccounts().success(
             function (response) {
                 $scope.allaccounts = response;
             }
         ).error(function () {
-                alert('Unable to get back user accounts :( ');
+                alert('Unable to get  user accounts :( ');
             });
-
     }
 
-    function getById(arr, id) {
-        for (var d = 0, len = arr.length; d < len; d += 1) {
-            if (arr[d].userId === id) {
-                return arr[d].accounts;
-            }
-        }
-    }
 
-    $scope.search().then(function () {
-        $scope.userAccounts = getById($scope.allaccounts, $routeParams.userId);
+    $scope.getUserAccounts().then(function () {
+        $scope.userAccounts =
+            accountFactory.getAccountsByUserId($scope.allaccounts, $routeParams.userId);
     });
+
+    $scope.deleteAccountButtonClicked = function (accountId) {
+        $scope.userAccounts
+            .splice(accountFactory.getUserAccountIndex($scope.userAccounts,accountId), 1);
+    }
 
 
 });

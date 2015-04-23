@@ -22,7 +22,9 @@
             <td width="80px"> <a href="" >{{x.userId}} </a></td>
             <td width="180px">{{x.name}}</td>
             <td width="350px">{{x.address}}</td>
-            <td width="80px"><button type="button" class="btn btn-primary" ng-click="go('/Users/'+x.userId+'/Accounts')">View Accounts</button></td>
+            <td width="80px">
+                <button type="button" class="btn btn-primary"
+                        ng-click="viewAccountsButtonClicked('/Users/'+x.userId+'/Accounts')">View Accounts</button></td>
         </tr>
         </tbody>
     </table>
