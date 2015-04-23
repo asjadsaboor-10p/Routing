@@ -3,9 +3,9 @@
  */
 
 
-angular.module('accountingApp').controller('userCtrl',function($scope,$http){
+angular.module('accountingApp').controller('userCtrl',function($scope,$http,dataFactory){
 
-   $http.get("../../data/users.json").then(
+    dataFactory.getUsers().then(
         function(response) { $scope.users = response.data;});
 
 });
