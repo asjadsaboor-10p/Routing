@@ -3,7 +3,8 @@
  */
 
 
-angular.module('accountingApp').controller('showUserAccountTransactionsCtrl',function ($scope, $http, $routeParams,transactionFactory) {
+angular.module('accountingApp').controller('showUserAccountTransactionsCtrl',
+    function ($scope, $http, $routeParams, $modal,$log, transactionFactory) {
 
         $scope.userAccountTransactions;
 
@@ -15,7 +16,7 @@ angular.module('accountingApp').controller('showUserAccountTransactionsCtrl',fun
             ).error(function () {
                     alert('Unable to get  user account transactions :( ');
                 });
-        }
+        };
 
 
         $scope.getUserAccountTransactions().then(function () {
@@ -25,11 +26,25 @@ angular.module('accountingApp').controller('showUserAccountTransactionsCtrl',fun
 
         $scope.deleteTransactionButtonClicked = function (index) {
 
-            var res = confirm("Are your sure?")
-            if(res){
-            $scope.userAccountTransactions
-                .splice(index, 1);}
-        }
+            var res = confirm("Are your sure?");
+            if (res) {
+                $scope.userAccountTransactions
+                    .splice(index, 1);
+            }
+        };
+
+        $scope.open = function () {
+            var modalInstance = $modal.open({
+                templateUrl: 'modal/addEditTransactionModal.html',
+                controller: 'addEditTransactionModalCtrl',
+                resolve: { items: function () {} }
+            });
+            modalInstance.result.then(function () {
+                $log.info('sucess: ' + new Date());
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
 
     });

@@ -3,7 +3,8 @@
  */
 
 
-angular.module('accountingApp').controller('showUserAccountsCtrl', function ($scope, $http,$location, $routeParams, accountFactory) {
+angular.module('accountingApp').controller('showUserAccountsCtrl',
+    function ($scope, $http,$location, $routeParams, accountFactory) {
 
     $scope.userAccounts;
     $scope.userId=$routeParams.userId;
@@ -35,4 +36,6 @@ angular.module('accountingApp').controller('showUserAccountsCtrl', function ($sc
     $scope.viewTransactionButtonClicked = function ( path ) {
         $location.path( path );
     };
+
+
 });
