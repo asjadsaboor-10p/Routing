@@ -16,11 +16,6 @@ angular.module('accountingApp').factory("accountFactory", function ($http) {
                     return arr[d].accounts;
                 }
             }
-        },
-        getUserAccountIndex: function (arr, id) {
-            return arr.map(function (array) {
-                return array.accountId;
-            }).indexOf(id)
         }
     };
 

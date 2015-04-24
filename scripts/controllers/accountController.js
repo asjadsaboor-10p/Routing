@@ -25,13 +25,14 @@ angular.module('accountingApp').controller('showUserAccountsCtrl', function ($sc
             accountFactory.getAccountsByUserId($scope.allaccounts, $routeParams.userId);
     });
 
-    $scope.deleteAccountButtonClicked = function (accountId) {
+    $scope.deleteAccountButtonClicked = function (index) {
+        var res = confirm("Are your sure?")
+        if(res){
         $scope.userAccounts
-            .splice(accountFactory.getUserAccountIndex($scope.userAccounts,accountId), 1);
+            .splice(index, 1);}
     }
 
     $scope.viewTransactionButtonClicked = function ( path ) {
-        console.log(path)
         $location.path( path );
     };
 });

@@ -8,7 +8,7 @@ angular.module('accountingApp').controller('showUserAccountTransactionsCtrl',fun
         $scope.userAccountTransactions;
 
         $scope.getUserAccountTransactions = function () {
-            return transactionFactory.getUserAccountTransactions().success(
+            return transactionFactory.getUserAccountsTransactions().success(
                 function (response) {
                     $scope.alltransactions = response;
                 }
@@ -20,12 +20,15 @@ angular.module('accountingApp').controller('showUserAccountTransactionsCtrl',fun
 
         $scope.getUserAccountTransactions().then(function () {
             $scope.userAccountTransactions =
-                accountFactory.getAccountsByUserId($scope.alltransactions, $routeParams.accountId);
+                transactionFactory.getTransactionsByAccountId($scope.alltransactions, $routeParams.accountId);
         });
 
-        $scope.deleteTransactionButtonClicked = function (transactionId) {
-            $scope.userAccounts
-                .splice(accountFactory.getUserAccountIndex($scope.userAccounts, accountId), 1);
+        $scope.deleteTransactionButtonClicked = function (index) {
+
+            var res = confirm("Are your sure?")
+            if(res){
+            $scope.userAccountTransactions
+                .splice(index, 1);}
         }
 
 

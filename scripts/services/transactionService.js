@@ -7,7 +7,7 @@
 angular.module('accountingApp').factory("transactionFactory", function ($http) {
 
     return {
-        getUsersAccountTransactions: function () {
+        getUserAccountsTransactions: function () {
             return $http.get('../../data/transactions.json')
         },
         getTransactionsByAccountId: function (arr, id) {
@@ -16,11 +16,6 @@ angular.module('accountingApp').factory("transactionFactory", function ($http) {
                     return arr[d].transactions;
                 }
             }
-        },
-        getUserAccountIndex: function (arr, id) {
-            return arr.map(function (array) {
-                return array.accountId;
-            }).indexOf(id)
         }
     };
 
