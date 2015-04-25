@@ -30,11 +30,19 @@
                 <label class="col-sm-2 control-label">Date </label>
                 <div class="col-md-6">
                     <p class="input-group">
-                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="transaction.date" is-open="opened" min-date="minDate" max-date="'2100-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required close-text="Close" />
+                        <input type="text" name="txnDate" id="txnDate" class="form-control" datepicker-popup="{{dateFormat}}" ng-model="transaction.date" is-open="opened" min-date="minDate" max-date="'2100-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required />
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
                     </p>
+
+
+                      <span style="color:red" ng-show="transactionForm.txnDate.$dirty && transactionForm.txnDate.$invalid">
+                    <p ng-if="transactionForm.txnDate.$error.required">Transaction Date is required</p>
+                          <p ng-if="transactionForm.txnDate.$invalid">Incorrect format</p>
+
+                </span>
+
                 </div>
             </div>
 

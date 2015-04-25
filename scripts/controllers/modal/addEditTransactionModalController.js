@@ -56,8 +56,12 @@ angular.module('accountingApp').controller('addEditTransactionModalCtrl', functi
 
 
     $scope.save = function () {
-        $scope.transaction.amount = "$" + $scope.amount;
-        $scope.transaction.date = $filter('date')($scope.transaction.date, $scope.dateFormat);
-        $modalInstance.close($scope.transaction);
+
+        if($scope.transactionForm.$valid) {
+            $scope.transaction.amount = "$" + $scope.amount;
+            $scope.transaction.date = $filter('date')($scope.transaction.date, $scope.dateFormat);
+            $modalInstance.close($scope.transaction);
+        }
+
     };
 });
