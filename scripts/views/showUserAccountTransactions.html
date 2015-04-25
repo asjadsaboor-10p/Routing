@@ -2,7 +2,7 @@
 <div ng-controller="showUserAccountsCtrl" class="center-block" style="width: 600px">
     <div>
         <button type="button" class="btn btn-primary"
-                ng-click="open()">Add Transaction
+                ng-click="addTransaction()">Add Transaction
         </button>
     </div>
     <br>
@@ -35,7 +35,7 @@
                 <td width="150px">{{x.type}}</td>
                 <td width="120px">
                     <button type="button" class="btn btn-primary"
-                            ng-click="">Edit
+                            ng-click="editTransaction($index)">Edit
                     </button>
                 </td>
                 <td width="80px">
