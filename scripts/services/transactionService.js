@@ -16,23 +16,6 @@ angular.module('accountingApp').factory("transactionFactory", function ($http, $
                     return arr[d].transactions;
                 }
             }
-        },
-
-        getAccountLastTransaction: function (accountId) {
-            return $q(function(resolve, reject) {
-
-                $http.get('../../data/transactions.json').success(function (response) {
-                    response.forEach(function(accountTransactionsEntry){
-                        if ( accountTransactionsEntry.accountId == accountId ) {
-                            resolve(accountTransactionsEntry.transactions[accountTransactionsEntry.transactions.length - 1]);
-                        }
-                    });
-
-                }).error(function (reason) {
-                    reject(reason);
-                });
-
-            });
         }
     };
 

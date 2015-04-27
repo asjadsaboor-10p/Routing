@@ -5,22 +5,19 @@
 angular.module('accountingApp').controller('viewTransactionModalCtrl', function ($scope, $modalInstance, $filter,$log, items,transactionFactory) {
 
     $scope.accountId = items;
-    $log.info('account id:   ' + $scope.accountId  );
 
-    transactionFactory.getAccountLastTransaction($scope.accountId).then(function(response){
+    transactionFactory.getUserAccountsTransactions().success(function (response) {
+        response.forEach(function(accountTransactionsEntry){
+            if ( accountTransactionsEntry.accountId == $scope.accountId  ) {
+                $scope.amount= accountTransactionsEntry.transactions[accountTransactionsEntry.transactions.length - 1].amount;
+                $scope.type= accountTransactionsEntry.transactions[accountTransactionsEntry.transactions.length - 1].type;
+                $scope.date= accountTransactionsEntry.transactions[accountTransactionsEntry.transactions.length - 1].date;
+            }
+        });
 
-
-        $scope.amount =response.amount;
-        $scope.type =response.type;
-        $scope.date =response.date;
-
-
-    }, function(reason) {
-
-        alert("Sorry! No Transaction Found.");
-
+    }).error(function (reason) {
+       $log.error(reason);
     });
-
 
     $scope.close = function () {
         $modalInstance.close();
