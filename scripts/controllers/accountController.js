@@ -4,38 +4,60 @@
 
 
 angular.module('accountingApp').controller('showUserAccountsCtrl',
-    function ($scope, $http,$location, $routeParams, accountFactory) {
+    function ($scope, $http, $location, $routeParams, $modal, accountFactory) {
 
-    $scope.userAccounts;
-    $scope.userId=$routeParams.userId;
+        $scope.userAccounts;
+        $scope.userId = $routeParams.userId;
 
 
-    $scope.getUserAccounts = function () {
-        return accountFactory.getUsersAccounts().success(
-            function (response) {
-                $scope.allaccounts = response;
+        $scope.getUserAccounts = function () {
+            return accountFactory.getUsersAccounts().success(
+                function (response) {
+                    $scope.allaccounts = response;
+                }
+            ).error(function () {
+                    alert('Unable to get  user accounts :( ');
+                });
+        }
+
+
+        $scope.getUserAccounts().then(function () {
+            $scope.userAccounts =
+                accountFactory.getAccountsByUserId($scope.allaccounts, $routeParams.userId);
+        });
+
+        $scope.deleteAccountButtonClicked = function (index) {
+            var res = confirm("Are your sure?")
+            if (res) {
+                $scope.userAccounts
+                    .splice(index, 1);
             }
-        ).error(function () {
-                alert('Unable to get  user accounts :( ');
+        }
+
+        $scope.viewTransactionButtonClicked = function (path) {
+            $location.path(path);
+        };
+
+
+        $scope.viewLastTransactionButtonClicked = function (index) {
+
+
+            var modalInstance = $modal.open({
+                templateUrl: 'modal/viewTransactionModal.html',
+                controller: 'viewTransactionModalCtrl',
+                resolve: {
+                    items: function () {
+                        return $scope.userAccounts[index].accountId;
+                    }
+                }
             });
-    }
+
+            modalInstance.result.then(function (editTrans) {
+
+            }, function () {
+            });
+
+        };
 
 
-    $scope.getUserAccounts().then(function () {
-        $scope.userAccounts =
-            accountFactory.getAccountsByUserId($scope.allaccounts, $routeParams.userId);
     });
-
-    $scope.deleteAccountButtonClicked = function (index) {
-        var res = confirm("Are your sure?")
-        if(res){
-        $scope.userAccounts
-            .splice(index, 1);}
-    }
-
-    $scope.viewTransactionButtonClicked = function ( path ) {
-        $location.path( path );
-    };
-
-
-});

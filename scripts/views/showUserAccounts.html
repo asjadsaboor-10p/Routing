@@ -1,5 +1,5 @@
 <div class="h1" style="text-align: center"> Accounts</div>
-<div ng-controller="showUserAccountsCtrl" class="center-block" style="width: 600px">
+<div ng-controller="showUserAccountsCtrl" class="center-block" style="width: 900px">
     <table st-table="rowCollection" class="table table-striped table-hover table-bordered ">
 
         <tr>
@@ -16,20 +16,32 @@
             <th>
 
             </th>
+            <th>
+
+            </th>
         </tr>
         <tbody>
-            <tr ng-repeat="x in userAccounts |  orderBy:orderByField:reverseSort">
-                <td width="200px">{{x.accountTitle}}</td>
-                <td width="150px">{{x.accountId}}</td>
-                <td width="150px">{{x.balance}}</td>
-                <td width="120px">
-                    <button type="button" class="btn btn-primary"
-                            ng-click="viewTransactionButtonClicked('/Users/'+userId+'/Account/'+x.accountId+'/Transactions')">View Transactions</button></td>
-                <td width="80px">
-                    <button type="button" class="btn btn-primary"
-                            ng-click="deleteAccountButtonClicked($index)">Delete</button>
-                </td>
-            </tr>
+        <tr ng-repeat="x in userAccounts |  orderBy:orderByField:reverseSort">
+            <td width="200px">{{x.accountTitle}}</td>
+            <td width="150px">{{x.accountId}}</td>
+            <td width="150px">{{x.balance}}</td>
+            <td width="150px">
+                <button type="button" class="btn btn-primary"
+                        ng-click="viewLastTransactionButtonClicked($index)">View Last Transactions
+                </button>
+            </td>
+            <td width="120px">
+                <button type="button" class="btn btn-primary"
+                        ng-click="viewTransactionButtonClicked('/Users/'+userId+'/Account/'+x.accountId+'/Transactions')">
+                    View Transactions
+                </button>
+            </td>
+            <td width="80px">
+                <button type="button" class="btn btn-primary"
+                        ng-click="deleteAccountButtonClicked($index)">Delete
+                </button>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>

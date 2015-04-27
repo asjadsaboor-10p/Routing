@@ -9,7 +9,7 @@
                 <label for="amount" class="col-sm-2 control-label">Amount</label>
 
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name="amount" id="amount"  ng-model="amount"  required>
+                    <input type="number" class="form-control" name="amount" id="amount" ng-model="amount" required>
 
                 <span style="color:red" ng-show="transactionForm.amount.$dirty && transactionForm.amount.$invalid">
                     <p ng-if="transactionForm.amount.$error.required">Transaction amount is required</p>
@@ -20,33 +20,34 @@
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Type</label>
+
                 <div class="col-sm-10">
-                    <select class="form-control" name="txnTypeCmb" ng-model="transaction.type" ng-options="item for item in txnTypeOptions"/>
+                    <select class="form-control" name="txnTypeCmb" ng-model="transaction.type"
+                            ng-options="item for item in txnTypeOptions"/>
                 </div>
             </div>
-
-
             <div class="form-group">
                 <label class="col-sm-2 control-label">Date </label>
+
                 <div class="col-md-6">
                     <p class="input-group">
-                        <input type="text" name="txnDate" id="txnDate" class="form-control" datepicker-popup="{{dateFormat}}" ng-model="transaction.date" is-open="opened" min-date="minDate" max-date="'2100-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required />
+                        <input type="text" name="txnDate" id="txnDate" class="form-control"
+                               datepicker-popup="{{dateFormat}}" ng-model="transaction.date" is-open="opened"
+                               min-date="minDate" max-date="'2100-06-22'" datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)" required/>
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                                class="glyphicon glyphicon-calendar"></i></button>
                       </span>
                     </p>
-
-
-                      <span style="color:red" ng-show="transactionForm.txnDate.$dirty && transactionForm.txnDate.$invalid">
+                      <span style="color:red"
+                            ng-show="transactionForm.txnDate.$dirty && transactionForm.txnDate.$invalid">
                     <p ng-if="transactionForm.txnDate.$error.required">Transaction Date is required</p>
                           <p ng-if="transactionForm.txnDate.$invalid">Incorrect format</p>
 
                 </span>
-
                 </div>
             </div>
-
-
         </div>
     </div>
     <div class="modal-footer">
