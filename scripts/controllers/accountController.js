@@ -4,7 +4,7 @@
 
 
 angular.module('accountingApp').controller('showUserAccountsCtrl',
-    function ($scope, $http, $location, $routeParams, $modal, accountFactory) {
+    function ($scope, $http, $location, $routeParams, $modal, $log, accountFactory) {
 
         $scope.userAccounts;
         $scope.userId = $routeParams.userId;
@@ -13,18 +13,18 @@ angular.module('accountingApp').controller('showUserAccountsCtrl',
         $scope.getUserAccounts = function () {
             return accountFactory.getUsersAccounts().success(
                 function (response) {
-                    $scope.allaccounts = response;
+                    response.forEach(function (allaccounts) {
+                        if (allaccounts.userId == $scope.userId) {
+                            $scope.userAccounts = allaccounts.accounts;
+                        }
+                    });
                 }
             ).error(function () {
                     alert('Unable to get  user accounts :( ');
                 });
-        }
+        };
 
-
-        $scope.getUserAccounts().then(function () {
-            $scope.userAccounts =
-                accountFactory.getAccountsByUserId($scope.allaccounts, $routeParams.userId);
-        });
+        $scope.getUserAccounts();
 
         $scope.deleteAccountButtonClicked = function (index) {
             var res = confirm("Are your sure?")
@@ -32,16 +32,13 @@ angular.module('accountingApp').controller('showUserAccountsCtrl',
                 $scope.userAccounts
                     .splice(index, 1);
             }
-        }
+        };
 
         $scope.viewTransactionButtonClicked = function (path) {
             $location.path(path);
         };
 
-
         $scope.viewLastTransactionButtonClicked = function (index) {
-
-
             var modalInstance = $modal.open({
                 templateUrl: 'modal/viewTransactionModal.html',
                 controller: 'viewTransactionModalCtrl',

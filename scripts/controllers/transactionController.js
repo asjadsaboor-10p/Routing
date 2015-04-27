@@ -11,18 +11,18 @@ angular.module('accountingApp').controller('showUserAccountTransactionsCtrl',
         $scope.getUserAccountTransactions = function () {
             return transactionFactory.getUserAccountsTransactions().success(
                 function (response) {
-                    $scope.alltransactions = response;
+                    response.forEach(function (alltransactions) {
+                        if (alltransactions.accountId == $routeParams.accountId) {
+                            $scope.userAccountTransactions = alltransactions.transactions;
+                        }
+                    });
                 }
             ).error(function () {
                     alert('Unable to get  user account transactions :( ');
                 });
         };
 
-
-        $scope.getUserAccountTransactions().then(function () {
-            $scope.userAccountTransactions =
-                transactionFactory.getTransactionsByAccountId($scope.alltransactions, $routeParams.accountId);
-        });
+        $scope.getUserAccountTransactions();
 
         $scope.deleteTransactionButtonClicked = function (index) {
 
@@ -45,30 +45,29 @@ angular.module('accountingApp').controller('showUserAccountTransactionsCtrl',
             modalInstance.result.then(function (newTrans) {
 
                 var count = $scope.userAccountTransactions.length;
-                newTrans.transactionId= 101 + count;
+                newTrans.transactionId = 101 + count;
                 $scope.userAccountTransactions.push(newTrans);
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
 
-
-
-        $scope.editTransaction = function(index){
+        $scope.editTransaction = function (index) {
 
             var modalInstance = $modal.open({
                 templateUrl: 'modal/addEditTransactionModal.html',
                 controller: 'addEditTransactionModalCtrl',
-                resolve: {  items: function () {  return $scope.userAccountTransactions[index]; }
+                resolve: {
+                    items: function () {
+                        return $scope.userAccountTransactions[index];
+                    }
                 }
             });
 
             modalInstance.result.then(function (editTrans) {
                 $scope.userAccountTransactions[index] = editTrans;
-            }, function () {});
+            }, function () {
+            });
 
         };
-
-
-
     });
