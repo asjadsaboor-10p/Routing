@@ -9,6 +9,7 @@ angular.module('accountingApp').controller('viewTransactionModalCtrl', function 
     transactionFactory.getUserAccountsTransactions().success(function (response) {
         response.forEach(function(accountTransactions){
             if ( accountTransactions.accountId == $scope.accountId  ) {
+                $scope.id= accountTransactions.transactions[accountTransactions.transactions.length - 1].transactionId;
                 $scope.amount= accountTransactions.transactions[accountTransactions.transactions.length - 1].amount;
                 $scope.type= accountTransactions.transactions[accountTransactions.transactions.length - 1].type;
                 $scope.date= accountTransactions.transactions[accountTransactions.transactions.length - 1].date;
