@@ -7,11 +7,11 @@ angular.module('accountingApp').controller('viewTransactionModalCtrl', function 
     $scope.accountId = items;
 
     transactionFactory.getUserAccountsTransactions().success(function (response) {
-        response.forEach(function(accountTransactionsEntry){
-            if ( accountTransactionsEntry.accountId == $scope.accountId  ) {
-                $scope.amount= accountTransactionsEntry.transactions[accountTransactionsEntry.transactions.length - 1].amount;
-                $scope.type= accountTransactionsEntry.transactions[accountTransactionsEntry.transactions.length - 1].type;
-                $scope.date= accountTransactionsEntry.transactions[accountTransactionsEntry.transactions.length - 1].date;
+        response.forEach(function(accountTransactions){
+            if ( accountTransactions.accountId == $scope.accountId  ) {
+                $scope.amount= accountTransactions.transactions[accountTransactions.transactions.length - 1].amount;
+                $scope.type= accountTransactions.transactions[accountTransactions.transactions.length - 1].type;
+                $scope.date= accountTransactions.transactions[accountTransactions.transactions.length - 1].date;
             }
         });
 

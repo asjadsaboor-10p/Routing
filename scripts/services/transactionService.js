@@ -4,7 +4,7 @@
 
 
 
-angular.module('accountingApp').factory("transactionFactory", function ($http, $q) {
+angular.module('accountingApp').factory("transactionFactory", function ($http) {
 
     return {
         getUserAccountsTransactions: function () {
